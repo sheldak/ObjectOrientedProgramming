@@ -5,32 +5,34 @@ public class Animal {
     private Vector2d position;
 
     public Animal(){
-        animalDirection = MapDirection.NORTH;
-        position = new Vector2d(2, 2);
+        this.animalDirection = MapDirection.NORTH;
+        this.position = new Vector2d(2, 2);
     }
 
     public String toString(){
-        return "(" + this.position.x + ", " + this.position.y + ", " + animalDirection.toString() + ")";
+        return "(" + this.position.x + ", " + this.position.y + ", " + this.animalDirection.toString() + ")";
     }
 
     public void move(MoveDirection direction){
-        Vector2d newPosition;
+        Vector2d v_0_0 = new Vector2d(0, 0);
+        Vector2d v_3_3 = new Vector2d(4, 4);
+
         switch(direction) {
             case FORWARD:
-                newPosition = position.add(animalDirection.toUnitVector());
-                if(newPosition.x >= 0 && newPosition.x <= 4 && newPosition.y >= 0 && newPosition.y <= 4)
-                    position = newPosition;
+                Vector2d forwardVector = this.position.add(this.animalDirection.toUnitVector());
+                if(v_0_0.precedes(forwardVector) && v_3_3.follows(forwardVector))
+                    this.position = forwardVector;
                 break;
             case RIGHT:
-                animalDirection = animalDirection.next();
+                this.animalDirection = this.animalDirection.next();
                 break;
             case BACKWARD:
-                newPosition = position.subtract(animalDirection.toUnitVector());
-                if(newPosition.x >= 0 && newPosition.x <= 4 && newPosition.y >= 0 && newPosition.y <= 4)
-                    position = newPosition;
+                Vector2d backwardVector = this.position.subtract(this.animalDirection.toUnitVector());
+                if(v_0_0.precedes(backwardVector) && v_3_3.follows(backwardVector))
+                    this.position = backwardVector;
                 break;
             case LEFT:
-                animalDirection = animalDirection.previous();
+                this.animalDirection = this.animalDirection.previous();
                 break;
         }
     }

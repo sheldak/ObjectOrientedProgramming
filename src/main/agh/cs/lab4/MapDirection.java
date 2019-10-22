@@ -1,6 +1,4 @@
-package agh.cs.lab3;
-
-import java.util.Map;
+package agh.cs.lab4;
 
 enum MapDirection {
     NORTH,
@@ -42,7 +40,7 @@ enum MapDirection {
             case WEST:
                 return new Vector2d(-1, 0);
             default:
-                return new Vector2d(0, 0);
+                return new Vector2d(0,0);
         }
     }
 }
