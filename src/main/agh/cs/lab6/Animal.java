@@ -1,9 +1,14 @@
-package agh.cs.lab5;
+package agh.cs.lab6;
 
 public class Animal implements IMapElement{
     private MapDirection animalDirection;
     private Vector2d position;
     private IWorldMap map;
+
+    public Animal(){
+        this.animalDirection = MapDirection.NORTH;
+        this.position = new Vector2d(2, 2);
+    }
 
     public Animal(IWorldMap map){
         this.animalDirection = MapDirection.NORTH;
@@ -33,36 +38,21 @@ public class Animal implements IMapElement{
     }
 
     public void move(MoveDirection direction){
-        Vector2d destination;
         switch(direction) {
             case FORWARD:
-                destination = this.position.add(this.animalDirection.toUnitVector());
-                this.moveTo(destination);
+                if(this.map.canMoveTo(this.position.add(this.animalDirection.toUnitVector())))
+                    this.position = this.position.add(this.animalDirection.toUnitVector());
                 break;
             case RIGHT:
                 animalDirection = animalDirection.next();
                 break;
             case BACKWARD:
-                destination = this.position.add(this.animalDirection.toUnitVector().opposite());
-                this.moveTo(destination);
+                if(this.map.canMoveTo(this.position.add(this.animalDirection.toUnitVector().opposite())))
+                    this.position = this.position.add(this.animalDirection.toUnitVector().opposite());
                 break;
             case LEFT:
                 animalDirection = animalDirection.previous();
                 break;
-        }
-    }
-
-    private void moveTo(Vector2d destination){
-        if(this.map.canMoveTo(destination)) {
-            boolean createGrass = false;
-            if (this.map.isOccupied(destination)){
-                this.map.destroyObject(destination);
-                createGrass = true;
-            }
-
-            this.position = destination;
-            if(this.map instanceof GrassField && createGrass)
-                Grass.place_grass((GrassField) map, 1);
         }
     }
 

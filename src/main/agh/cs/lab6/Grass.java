@@ -1,15 +1,15 @@
-package agh.cs.lab5;
+package agh.cs.lab6;
 
-public class HayStack implements IMapElement{
+public class Grass implements IMapElement {
     private Vector2d position;
 
-    public HayStack(int x, int y){
+    public Grass(int x, int y){
         this.position = new Vector2d(x, y);
 
     }
 
     public String toString(){
-        return "s";
+        return "*";
     }
 
     public Vector2d getPosition(){

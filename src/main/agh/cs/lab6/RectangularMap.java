@@ -1,4 +1,4 @@
-package agh.cs.lab5;
+package agh.cs.lab6;
 
 public class RectangularMap extends AbstractWorldMap {
     private int width;
@@ -22,5 +22,23 @@ public class RectangularMap extends AbstractWorldMap {
         Vector2d v_w_h = new Vector2d(this.width-1, this.height-1);
 
         return position.follows(v_0_0) && position.precedes(v_w_h) && !this.isOccupied(position);
+    }
+
+    @Override
+    public boolean isOccupied(Vector2d position) {
+        for(IMapElement element : this.elements){
+            if(element.getPosition().equals(position))
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Object objectAt(Vector2d position) {
+        for(IMapElement element : this.elements){
+            if(element.getPosition().equals(position))
+                    return element;
+        }
+        return null;
     }
 }

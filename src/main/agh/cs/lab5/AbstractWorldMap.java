@@ -26,10 +26,35 @@ public abstract class AbstractWorldMap implements IWorldMap{
 
     @Override
     public boolean place(Animal animal) {
-        if(this.isOccupied(animal.getPosition()))
-            return false;
+        if (this.canMoveTo(animal.getPosition())) {
+            this.elements.add(animal);
+            return true;
+        }
 
-        this.elements.add(animal);
-        return true;
+        return false;
+    }
+
+    @Override
+    public boolean isOccupied(Vector2d position) {
+        for(IMapElement element : this.elements){
+            if(element.getPosition().equals(position))
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Object objectAt(Vector2d position) {
+        for(IMapElement element : this.elements){
+            if(element.getPosition().equals(position))
+                return element;
+        }
+        return null;
+    }
+
+    @Override
+    public void destroyObject(Vector2d position) {
+        if (this.objectAt(position) != null)
+            this.elements.remove(this.objectAt(position));
     }
 }

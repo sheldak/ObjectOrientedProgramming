@@ -1,4 +1,4 @@
-package agh.cs.lab5;
+package agh.cs.lab6;
 
 /**
  * The interface responsible for interacting with the map of the world.
@@ -54,12 +54,4 @@ public interface IWorldMap {
      * @return Object or null if the position is not occupied.
      */
     Object objectAt(Vector2d position);
-
-    /**
-     * Remove object at passed position.
-     *
-     * @param position
-     *            Position of object to remove from elements list.
-     */
-    void destroyObject(Vector2d position);
 }

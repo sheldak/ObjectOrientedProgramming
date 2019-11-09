@@ -11,13 +11,7 @@ public class World {
         //String[] moves = {"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"};
         //MoveDirection[] directions = new OptionsParser().parse(moves);
 
-        List<HayStack> hayStacks = new ArrayList<>();
-        hayStacks.add(new HayStack(-4, -4));
-        hayStacks.add(new HayStack(7, 7));
-        hayStacks.add(new HayStack(3, 6));
-        hayStacks.add(new HayStack(2, 0));
-
-        IWorldMap map = new UnboundedMap(hayStacks);
+        IWorldMap map = new GrassField(10);
         map.place(new Animal(map));
         map.place(new Animal(map, 3, 4));
 
