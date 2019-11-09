@@ -1,7 +1,5 @@
 package agh.cs.lab6;
 
-import java.util.Vector;
-
 public class Vector2d {
     public final int x;
     public final int y;

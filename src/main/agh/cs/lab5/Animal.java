@@ -62,7 +62,7 @@ public class Animal implements IMapElement{
 
             this.position = destination;
             if(this.map instanceof GrassField && createGrass)
-                Grass.place_grass((GrassField) map, 1);
+                Grass.placeGrass((GrassField) map, 1);
         }
     }
 

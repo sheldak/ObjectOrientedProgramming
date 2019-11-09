@@ -7,7 +7,7 @@ public class GrassField extends AbstractWorldMap {
 
     public GrassField(int amount){
         size = (int) Math.sqrt(amount * 10);
-        Grass.place_grass(this, amount);
+        Grass.placeGrass(this, amount);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class GrassField extends AbstractWorldMap {
     @Override
     public boolean place(Animal animal){
         if(objectAt(animal.getPosition()) instanceof Grass){
-            Grass.place_grass(this, 1);
+            Grass.placeGrass(this, 1);
             this.destroyObject(animal.getPosition());
         }
         return super.place(animal);

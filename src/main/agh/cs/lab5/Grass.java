@@ -13,7 +13,7 @@ public class Grass implements IMapElement{
         return "*";
     }
 
-    public static void place_grass(GrassField map, int amount){
+    public static void placeGrass(GrassField map, int amount){
         while(amount > 0){
             int pos_x;
             int pos_y;
