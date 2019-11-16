@@ -1,11 +1,11 @@
-package agh.cs.lab6;
+package agh.cs.lab7;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class AbstractWorldMap implements IWorldMap {
+public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver {
     List<Animal> animals = new ArrayList<>();
     Map<Vector2d, IMapElement> elementsMap = new HashMap<>();
 
@@ -26,6 +26,7 @@ public abstract class AbstractWorldMap implements IWorldMap {
             throw new IllegalArgumentException("position: " + animal.getPosition().toString() + " is occupied");
         }
 
+        animal.addObserver(this);
         this.animals.add(animal);
         this.elementsMap.put(animal.getPosition(), animal);
         return true;
@@ -33,25 +34,30 @@ public abstract class AbstractWorldMap implements IWorldMap {
 
     @Override
     public boolean isOccupied(Vector2d position) {
-        return this.elementsMap.containsKey(position);
+        return this.objectAt(position) != null;
     }
 
     @Override
     public Object objectAt(Vector2d position) {
-        if(this.elementsMap.containsKey(position))
-            return this.elementsMap.get(position);
-
-        return null;
+        return this.elementsMap.get(position);
     }
 
-    @Override
-    public void destroyObject(Vector2d position) {
-        Object object = this.objectAt(position);
-        if (object != null){
-            this.elementsMap.remove(position);
+//    @Override
+//    public void deleteObject(Vector2d position) {
+//        Object object = this.objectAt(position);
+//        if (object != null){
+//            this.elementsMap.remove(position);
+//
+//            if(object instanceof Animal)
+//                animals.remove(object);
+//        }
+//    }
 
-            if(object instanceof Animal)
-                animals.remove(object);
-        }
+    @Override
+    public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+        Animal animal = (Animal) this.elementsMap.get(oldPosition);
+        this.elementsMap.remove(oldPosition);
+
+        this.elementsMap.put(newPosition, animal);
     }
 }
